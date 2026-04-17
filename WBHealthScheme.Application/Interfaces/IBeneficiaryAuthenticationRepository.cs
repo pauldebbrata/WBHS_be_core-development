@@ -6,7 +6,10 @@ namespace WBHealthScheme.Application.Interfaces
         Task<List<BeneficiaryAuthenticationResponse>>
         GetBeneficiaryByMobileAsync(string mobileNumber);
 
-         Task<List<Beneiciary_ward_resp_broto>>
-         GetwardByappAsync(string app_ID);
+        Task<List<Beneiciary_ward_resp_broto>>
+        GetwardByappAsync(string app_ID);
+
+        Task<List<UnivBeneficiaryAuthenticationResponse>>
+        GetBeneficiaryByUniqueIdAsync(string uniqueId);
     }
 }
