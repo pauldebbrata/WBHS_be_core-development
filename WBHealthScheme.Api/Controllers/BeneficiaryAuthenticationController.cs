@@ -32,22 +32,24 @@ namespace WBHealthScheme.Api.Controllers
                 .Ok(result, "Beneficiary fetched successfully"));
         }
 
+        [HttpGet("univ/{uniqueId}")]
+        public async Task<IActionResult> GetByUniqueId(string uniqueId)
+        {
+            var result = await
+            _service.GetBeneficiaryByUniqueIdAsync(uniqueId);
+
+            return Ok(ApiResponse<List<UnivBeneficiaryAuthenticationResponse>>
+                .Ok(result, "Beneficiary fetched successfully"));
+        }
+
         [HttpGet("APPID/{enrollmentid}")]
         public async Task<IActionResult> GetwardByappid(string enrollmentid)
-    {
-    var result = await
-    _service.GetwardByappAsync(enrollmentid);
-
-    //return Ok(new ApiResponse<List<BeneficiaryAuthenticationResponse>>
-    //{
-    //    Success = true,
-    //    Message = "Beneficiary fetched successfully",
-    //    Status = "200",
-    //    Data = result,
-    //    Errors = null
-    //});
-    return Ok(ApiResponse<List<Beneiciary_ward_resp_broto>>
-        .Ok(result, "Enrollment fetched successfully"));
-}
+        {
+        var result = await
+        _service.GetwardByappAsync(enrollmentid);
+        
+        return Ok(ApiResponse<List<Beneiciary_ward_resp_broto>>
+            .Ok(result, "Enrollment fetched successfully"));
+        }
     }
 }
