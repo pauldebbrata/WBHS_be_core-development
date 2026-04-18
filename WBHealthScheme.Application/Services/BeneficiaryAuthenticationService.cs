@@ -39,19 +39,34 @@ namespace WBHealthScheme.Application.Services
                 throw new NotFoundException("Beneficiary not found");
             return result;
         }
+
          public async Task<List<Beneiciary_ward_resp_broto>>
- GetwardByappAsync(string app_ID)
- {
-     if (string.IsNullOrWhiteSpace(app_ID))
-         throw new BusinessRuleException("Enrollment ID is required");
-     if (app_ID.Length != 10 || !app_ID.All(char.IsDigit))
-         throw new BusinessRuleException("Invalid Enrollment ID");
-     var result = await
-         _repository.GetwardByappAsync(app_ID);
-     if (result == null || !result.Any())
-         throw new NotFoundException("Enrollment ID not found");
-     return result;
- }
+        GetwardByappAsync(string app_ID)
+        {
+            if (string.IsNullOrWhiteSpace(app_ID))
+                throw new BusinessRuleException("Enrollment ID is required");
+            if (app_ID.Length != 10 || !app_ID.All(char.IsDigit))
+                throw new BusinessRuleException("Invalid Enrollment ID");
+            var result = await
+                _repository.GetwardByappAsync(app_ID);
+            if (result == null || !result.Any())
+                throw new NotFoundException("Enrollment ID not found");
+            return result;
+        }
+
+        public async Task<List<ClgBeneficiaryAuthenticationResponse>>
+        GetBeneficiaryByHrmsIdClgAsync(string hrmsId)
+        {
+            if (string.IsNullOrWhiteSpace(hrmsId))
+                throw new BusinessRuleException("HRMS ID is required");
+            if (hrmsId.Length != 11)
+                throw new BusinessRuleException("Invalid HRMS ID");
+            var result = await
+                _repository.GetBeneficiaryByHrmsIdClgAsync(hrmsId);
+            if (result == null || !result.Any())
+                throw new NotFoundException("Beneficiary not found");
+            return result;
+        }
         
         
     }

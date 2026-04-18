@@ -69,19 +69,29 @@ namespace WBHealthScheme.Infrastructure.Repositories
             new SqlParameter("@uniqueId", uniqueId))
         .ToListAsync();
         }
-public async Task<List<Beneiciary_ward_resp_broto>>
-GetwardByappAsync(string app_ID)
-{
-    var ward = await _context.EmployeeBasicInfos.Where(Y => Y.HrmsId == app_ID).
-        Select(Y => new Beneiciary_ward_resp_broto
+
+        public async Task<List<Beneiciary_ward_resp_broto>>
+        GetwardByappAsync(string app_ID)
         {
-            //wardtmc="TATA-"+x.WardTmc + ",GOVT-" + x.WardGovt + "PRIVATE-" + x.WardName
-            wardtmc=  "Tata Medical Center-"+Y.WardTmc,
-            wardgovt= "Government Hospital-"+Y.WardGovt,
-            wardname= "Other Private Empanelled Hospital-"+Y.WardName,
+            var ward = await _context.EmployeeBasicInfos.Where(Y => Y.HrmsId == app_ID).
+                Select(Y => new Beneiciary_ward_resp_broto
+                {
+                    //wardtmc="TATA-"+x.WardTmc + ",GOVT-" + x.WardGovt + "PRIVATE-" + x.WardName
+                    wardtmc=  "Tata Medical Center-"+Y.WardTmc,
+                    wardgovt= "Government Hospital-"+Y.WardGovt,
+                    wardname= "Other Private Empanelled Hospital-"+Y.WardName,
+                }
+                ).ToListAsync();
+            return ward.ToList();
         }
-        ).ToListAsync();
-    return ward.ToList();
-}
+
+        public async Task<List<ClgBeneficiaryAuthenticationResponse>>
+        GetBeneficiaryByHrmsIdClgAsync(string hrmsId)
+        {
+            return await _context.Set<ClgBeneficiaryAuthenticationResponse>()
+        .FromSqlRaw("EXEC GetClgBeneficiaryAuthenticationByHrmsId @hrmsId",
+            new SqlParameter("@hrmsId", hrmsId))
+        .ToListAsync();
+        }
     }
 }

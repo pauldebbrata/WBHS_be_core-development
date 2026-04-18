@@ -199,6 +199,8 @@ public class WBHSDbContext : DbContext
         });
 
         modelBuilder.Entity<UnivBeneficiaryAuthenticationResponse>().HasNoKey();
+
+        modelBuilder.Entity<ClgBeneficiaryAuthenticationResponse>().HasNoKey();
         
     }
 }
