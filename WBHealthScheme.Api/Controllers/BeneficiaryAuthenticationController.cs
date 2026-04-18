@@ -51,5 +51,15 @@ namespace WBHealthScheme.Api.Controllers
         return Ok(ApiResponse<List<Beneiciary_ward_resp_broto>>
             .Ok(result, "Enrollment fetched successfully"));
         }
+
+        [HttpGet("clg/{hrmsId}")]
+        public async Task<IActionResult> GetByHrmsId(string hrmsId)
+        {
+            var result = await
+            _service.GetBeneficiaryByHrmsIdClgAsync(hrmsId);
+
+            return Ok(ApiResponse<List<ClgBeneficiaryAuthenticationResponse>>
+                .Ok(result, "Beneficiary fetched successfully"));
+        }
     }
 }
