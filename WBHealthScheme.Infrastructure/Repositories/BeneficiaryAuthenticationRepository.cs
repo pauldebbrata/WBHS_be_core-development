@@ -95,6 +95,7 @@ namespace WBHealthScheme.Infrastructure.Repositories
         }
 
         
+        }        
 
         public async Task<List<ClgBeneficiaryAuthenticationResponse>>
         GetBeneficiaryByHrmsIdClgAsync(string hrmsId)
