@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
+using WBHealthScheme.Application.dtos;
 using WBHealthScheme.Application.Dtos;
 using WBHealthScheme.Application.Interfaces;
 using WBHealthScheme.Domain.Common;
@@ -42,18 +43,16 @@ namespace WBHealthScheme.Api.Controllers
                 .Ok(result, "Beneficiary fetched successfully"));
         }
 
-        [HttpGet("APPID/{enrollmentid}")]
-        public async Task<IActionResult> GetwardByappid(string enrollmentid)
+        [HttpGet("govtemp/{hrmsid}")]
+        public async Task<IActionResult> GetwardByappid(string hrmsid)
         {
-        var result = await
-        _service.GetwardByappAsync(enrollmentid);
+            var result = await
+            _service.GetwardByappAsync(hrmsid);
 
-        return Ok(ApiResponse<List<Beneiciary_ward_resp_broto>>
-        .Ok(result, "Enrollment fetched successfully"));
-        
-        return Ok(ApiResponse<List<Beneiciary_ward_resp_broto>>
+            return Ok(ApiResponse<List<Beneiciary_ward_resp_broto>>
             .Ok(result, "Enrollment fetched successfully"));
         }
+
 
         [HttpGet("clg/{hrmsId}")]
         public async Task<IActionResult> GetByHrmsId(string hrmsId)
@@ -84,5 +83,17 @@ namespace WBHealthScheme.Api.Controllers
             return Ok(ApiResponse<List<PnhytPenBeneficiaryAuthenticationResponse>>
                 .Ok(result, "Beneficiary fetched successfully"));
         }
+
+        [HttpGet("govtemppen/{appliId}")]
+        public async Task<IActionResult> GetbyAppliID(string appliId)
+        {
+            var result = await _service.GetBeneficiaryEmpPenByAppIdAsync(appliId);
+
+            return Ok(ApiResponse<List<EmpPenBeneficiaryAuthenticationResponse>>
+            .Ok(result, "Enrollment fetched successfully"));
+        }
+        
+        
+
     }
 }
